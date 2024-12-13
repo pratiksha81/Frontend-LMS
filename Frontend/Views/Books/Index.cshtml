@@ -154,11 +154,8 @@
 
         <form asp-action="@((bool)isEdit ? "EditBook" : "AddBook")" method="post">
             <div class="row mb-3">
-                <div class="col-md-6">
-                    <label for="BookId" class="form-label">Book ID</label>
-                    <input type="text" class="form-control" id="BookId" name="BookId" value="@book.BookId">
-                </div>
-                <div class="col-md-6">
+                
+                <div class="col-md-12">
                     <label for="ISBN" class="form-label">ISBN</label>
                     <input type="text" class="form-control" id="ISBN" name="ISBN" value="@book.ISBN" required>
                 </div>
