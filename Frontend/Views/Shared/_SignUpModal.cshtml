@@ -1,0 +1,40 @@
+﻿@model Frontend.Models.SignUp
+
+<div class="modal fade" id="signUpModal" tabindex="-1" aria-labelledby="signUpModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="signUpModalLabel">Register Now</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body row">
+                <form asp-action="_SignUpModal" method="post">
+                    <div class="col-md-12">
+                        <label for="Username" class="form-label">Username</label>
+                        <input type="text" class="form-control" asp-for="Username" placeholder="Enter your username" required>
+                    </div>
+                    <div class="col-md-12">
+                        <label for="Email" class="form-label">Email</label>
+                        <input type="email" class="form-control" asp-for="Email" placeholder="Enter your email" required>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="Password" class="form-label">Password</label>
+                            <input type="password" class="form-control" asp-for="Password" placeholder="Enter your password" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="Role" class="form-label">Role</label>
+                            <select class="form-control" asp-for="Role" required>
+                                <option value="" disabled selected>Select Role</option>
+                                <option value="Admin">Admin</option>
+                                <option value="Student">Student</option>
+                            </select>
+                        </div>
+
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Register</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

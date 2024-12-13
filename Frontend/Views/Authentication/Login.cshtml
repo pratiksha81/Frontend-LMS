@@ -119,17 +119,20 @@
                 </form>
             </div>
 
-            <!-- Register Section (Right) -->
-            <div class="col-md-6 register">
-                <div>
-                    <img src="~/images/PageIcon/LLlogo.png" alt="Library Logo" class="image-preview">
-                    <img src="~/images/PageIcon/HL.png" alt="Library Logo" class="image-preview">
-                    <p class="register-title">New to our platform?</p>
-                    <p class="register-title"><strong>Register Now</strong></p>
-                    <a asp-action="SignUp" class="btn register-btn">Register</a>
-                </div>
+               <!-- Register Section (Right) -->
+            <div class=" col-md-6 d-flex flex-column justify-content-center align-items-center register">
+            <div class="" style="width:366px"><img src="~/images/PageIcon/LLlogo.png" alt="Library Logo" class="image-preview">
+            <div class="" style="width:366px">
+            <img src="~/images/PageIcon/HL.png" alt="Library Logo" class="image-preview">
+            <p style="font-weight:500; font-size:32px;">New to our platform?</p>
+            <p style="font-weight:500; font-size:32px;"><strong>Register Now</strong></p>
+            <a style="padding:12px 96px;border-radius: 30px;" class="btn register-btn" data-bs-toggle="modal"
+                                   data-bs-target="#signUpModal">Register</a>
             </div>
-        </div>
+            </div>
+            </div>
+                    @Html.Partial("_SignUpModal", new Frontend.Models.SignUp())
+                    </div>
     </div>
 </body>
 </html>

@@ -9,9 +9,10 @@ namespace Frontend.Controllers
     {
         private readonly AuthService _authService;
         private readonly HttpClient _httpClient;
-        public AuthenticationController(AuthService authService)
+        public AuthenticationController(AuthService authService, IHttpClientFactory httpClientFactory)
         {
             _authService = authService;
+            _httpClient = httpClientFactory.CreateClient();
         }
 
         // Default login page (GET: /Authentication/Index)
@@ -36,7 +37,7 @@ namespace Frontend.Controllers
             var token = HttpContext.Request.Cookies["token"];
             if (!string.IsNullOrEmpty(token))
             {
-                return RedirectToAction("Index", "Author");
+                return RedirectToAction("Index", "Dashboard");
             }
 
             // Validate login credentials
@@ -47,7 +48,7 @@ namespace Frontend.Controllers
                 {
                     // Store token in cookies
                     HttpContext.Response.Cookies.Append("token", generatedToken);
-                    return RedirectToAction("Index", "Dashboard");  
+                    return RedirectToAction("Index", "Dashboard");
                 }
 
                 // If credentials are invalid, display an error message
@@ -56,6 +57,39 @@ namespace Frontend.Controllers
 
             return View("Login", model); // Reload the login page with the model and errors
         }
+
+
+        // GET: /Authentication/SignUp
+        [HttpGet]
+        public IActionResult _SignUpModal()
+        {
+            return View(); // Returns the signup view
+        }
+
+        // POST: /Authentication/SignUp
+        public async Task<IActionResult> _SignUpModal(SignUp model)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var response = await _httpClient.PostAsJsonAsync("https://localhost:7178/api/Auth/signup", model);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        return RedirectToAction("Index", "Authentication"); // Redirect to the login page
+                    }
+
+                    ModelState.AddModelError("", "Failed to sign up. Please try again.");
+                }
+                catch
+                {
+                    ModelState.AddModelError("", "An error occurred while processing your request.");
+                }
+            }
+
+            return View(model); // Reload the signup page with errors
+        }
+
 
         // Handles logout requests (GET: /Authentication/Logout)
         public IActionResult Logout()
