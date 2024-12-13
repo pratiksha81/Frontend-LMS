@@ -5,20 +5,34 @@
 }
 
 <style>
-    body, html {
-        margin: 0;
-        padding: 0;
-        height: 100%;
+    .header {
+        height: 65px;
+        margin-left: 222px;
+        background: #fff;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        display: flex;
+        align-items: center;
+        padding: 0 20px;
     }
 
-    .header {
-        height: 71px;
-    }
+        .header h2 {
+            font-size: 18px;
+            margin: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .header img {
+            width: 35px;
+            height: 35px;
+            margin-right: 10px;
+        }
 
     .body {
         background: #F2F2F2;
-        padding: 35px 40px 0 40px;
-        height: calc(100% - 71px);
+        padding: 20px;
+        margin-left: 222px;
+        height: 100vh;
         overflow-y: auto;
     }
 
@@ -56,7 +70,7 @@
 <div class="body">
     <!-- Transaction Details Table -->
     <div style="background: #E3E3E3; padding: 22px 34px; border: none; border-radius: 8px; box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);">
-         <table class="table">
+        <table class="table">
             <thead>
                 <tr style="text-align:center">
                     <th>Transaction ID</th>
@@ -65,20 +79,19 @@
                     <th>Book ID</th>
                     <th>Transaction Type</th>
                     <th>Date</th>
-                     
                 </tr>
             </thead>
             <tbody>
                 @foreach (var ttransaction in Model)
+
                 {
                     <tr style="text-align:center">
-                        <td >@ttransaction.TransactionId</td>
+                        <td>@ttransaction.TransactionId</td>
                         <td>@ttransaction.StudentId</td>
                         <td>@ttransaction.UserId</td>
                         <td>@ttransaction.BookId</td>
                         <td>@ttransaction.TransactionType</td>
                         <td>@ttransaction.Date.ToShortDateString()</td>
-                        
                     </tr>
                 }
             </tbody>

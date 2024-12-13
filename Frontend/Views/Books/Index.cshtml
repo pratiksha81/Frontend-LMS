@@ -5,20 +5,34 @@
 }
 
 <style>
-    body, html {
-        margin: 0;
-        padding: 0;
-        height: 100%;
+    .header {
+        height: 65px;
+        margin-left: 222px;
+        background: #fff;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        display: flex;
+        align-items: center;
+        padding: 0 20px;
     }
 
-    .header {
-        height: 71px;
-    }
+        .header h2 {
+            font-size: 18px;
+            margin: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .header img {
+            width: 35px;
+            height: 35px;
+            margin-right: 10px;
+        }
 
     .body {
         background: #F2F2F2;
-        padding: 35px 40px 0 40px;
-        height: calc(100% - 71px);
+        padding: 20px;
+        margin-left: 222px;
+        height: 100vh;
         overflow-y: auto;
     }
 
@@ -68,14 +82,14 @@
     .btn-Action {
         width: 128px;
         height: 52px;
-        background-color: #C7B303; /* Yellow for Edit */
+        background-color: #C7B303;
         color: white;
         padding: 14px 20px;
         border: none;
-        border-radius: 20px; /* Rounded corners */
+        border-radius: 20px;
         font-size: 14px;
         font-weight: 600;
-        cursor: pointer; /* Pointer on hover */
+        cursor: pointer;
     }
 
     .table tbody td:last-child {
@@ -91,57 +105,99 @@
     }
 
     .btn:hover {
-        opacity: 0.9; /* Subtle hover effect */
+        opacity: 0.9;
+    }
+
+    .card {
+        background: #E3E3E3;
+        padding: 22px 34px;
+        border: none;
+        border-radius: 8px;
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-label {
+        font-size: 14px;
+        font-weight: bold;
+        color: #333;
+    }
+
+    .form-control {
+        height: 65px;
+        background-color: #D9D9D9;
+        border: none;
+        border-radius: 4px;
+    }
+
+    .submit-btn {
+        background-color: #255D81;
+        width: 260px;
+        color: white;
+        padding: 21px 56px;
+        border: none;
+        border-radius: 20px;
     }
 </style>
 
-<div style="width: 100%; display: flex; align-items: center;" class="header">
-    <img src="~/images/NavbarLogo/BookH.png" alt="Author Icon" style="width: 35px; height: 35px; margin-left: 40px; margin-right: 9px;">
-    <h2 style="margin: 0 0 0 10px;">Book Info</h2>
+<div class="header">
+    <img src="~/images/NavbarLogo/BookH.png" alt="Author Icon">
+    <h2>Book Info</h2>
 </div>
 
 <div class="body">
-    <div class="card mb-4" style="background: #E3E3E3; padding: 22px 34px; border: none; border-radius: 8px; box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);">
+    <div class="card mb-4">
         @{
             var isEdit = ViewBag.IsEdit ?? false;
+
             var book = ViewBag.Book ?? new Book();
         }
 
         <form asp-action="@((bool)isEdit ? "EditBook" : "AddBook")" method="post">
-            <div>
-                <input hidden type="text" class="form-control" name="BookId" value="@book.BookId" style="height: 65px; background-color: #D9D9D9; border: none; border-radius: 4px;" required>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="BookId" class="form-label">Book ID</label>
+                    <input type="text" class="form-control" id="BookId" name="BookId" value="@book.BookId">
+                </div>
+                <div class="col-md-6">
+                    <label for="ISBN" class="form-label">ISBN</label>
+                    <input type="text" class="form-control" id="ISBN" name="ISBN" value="@book.ISBN" required>
+                </div>
             </div>
-            <div class="mb-3">
-                <label class="form-label" style="font-size: 14px; font-weight: bold; color: #333;">Title</label>
-                <input type="text" class="form-control" name="Title" value="@book.Title" style="height: 65px; background-color: #D9D9D9; border: none; border-radius: 4px;" required>
-            </div>
-            <div class="mb-3">
-                <label class="form-label" style="font-size: 14px; font-weight: bold; color: #333;">AuthorId</label>
-                <input type="number" class="form-control" name="AuthorId" value="@book.AuthorId" style="height: 65px; background-color: #D9D9D9; border: none; border-radius: 4px;" required>
-            </div>
-            <div class="mb-3">
-                <label class="form-label" style="font-size: 14px; font-weight: bold; color: #333;">Genre</label>
-                <input type="text" class="form-control" name="Genre" value="@book.Genre" style="height: 65px; background-color: #D9D9D9; border: none; border-radius: 4px;" required>
-            </div>
-            <div class="mb-3">
-                <label class="form-label" style="font-size: 14px; font-weight: bold; color: #333;">ISBN</label>
-                <input type="text" class="form-control" name="ISBN" value="@book.ISBN" style="height: 65px; background-color: #D9D9D9; border: none; border-radius: 4px;" required>
-            </div>
-            <div class="mb-3">
-                <label class="form-label" style="font-size: 14px; font-weight: bold; color: #333;">Quantity</label>
-                <input type="number" class="form-control" name="Quantity" value="@book.Quantity" style="height: 65px; background-color: #D9D9D9; border: none; border-radius: 4px;" required>
-            </div>
-            <button type="submit" class="btn" style="background-color: #255D81; width: 260px; color: white; padding: 21px 56px; border: none; border-radius: 20px;">@((bool)isEdit ? "Update book" : "Add book")</button>
-        </form>
 
+            <div class="row mb-3">
+                <div class="col-md-7">
+                    <label for="Title" class="form-label">Title</label>
+                    <input type="text" class="form-control" id="Title" name="Title" value="@book.Title" required>
+                </div>
+                <div class="col-md-5">
+                    <label for="Genre" class="form-label">Genre</label>
+                    <input type="text" class="form-control" id="Genre" name="Genre" value="@book.Genre" required>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="AuthorId" class="form-label">Author ID</label>
+                    <input type="number" class="form-control" id="AuthorId" name="AuthorId" value="@book.AuthorId" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="Quantity" class="form-label">Quantity</label>
+                    <input type="number" class="form-control" id="Quantity" name="Quantity" value="@book.Quantity" required>
+                </div>
+            </div>
+            <button type="submit" class="submit-btn">
+                @((bool)isEdit ? "Update Book" : "Add Book")
+            </button>
+        </form>
     </div>
 
-    <div style="background: #E3E3E3; padding: 22px 34px; border: none; border-radius: 8px; box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);">
-        <h3 style="font-weight: 600; padding-bottom: 14px; font-size: 28px; color: #333;">book Details</h3>
-        <table class="table" style="border-collapse: collapse;">
+
+    <div class="card">
+        <h3>Book Details</h3>
+        <table class="table">
             <thead>
                 <tr>
-                    <th>book ID</th>
+                    <th>Book ID</th>
                     <th>Title</th>
                     <th>AuthorId</th>
                     <th>Genre</th>
@@ -152,6 +208,7 @@
             </thead>
             <tbody>
                 @foreach (var abook in Model)
+
                 {
                     <tr>
                         <td>@abook.BookId</td>
@@ -160,7 +217,7 @@
                         <td>@abook.Genre</td>
                         <td>@abook.ISBN</td>
                         <td>@abook.Quantity</td>
-                        <td class="">
+                        <td>
                             <form asp-action="Indexx" method="post" style="display: inline;">
                                 <input type="hidden" name="BookId" value="@abook.BookId">
                                 <input type="hidden" name="Title" value="@abook.Title">

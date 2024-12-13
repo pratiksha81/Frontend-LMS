@@ -47,7 +47,7 @@ namespace Frontend.Controllers
                 {
                     // Store token in cookies
                     HttpContext.Response.Cookies.Append("token", generatedToken);
-                    return RedirectToAction("Index", "Author");  
+                    return RedirectToAction("Index", "Dashboard");  
                 }
 
                 // If credentials are invalid, display an error message
