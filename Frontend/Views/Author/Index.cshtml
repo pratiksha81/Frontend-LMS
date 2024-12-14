@@ -169,7 +169,8 @@
         }
 
         <form asp-action="@((bool)isEdit ? "EditAuthor" : "AddAuthor")" method="post">
-            
+            <input type="text" class="form-control" name="AuthorID" value="@author.AuthorID" hidden required>
+
             <div class="mb-3">
                 <label class="form-label">Author Name</label>
                 <input type="text" class="form-control" name="Name" value="@author.Name" required>
@@ -199,7 +200,7 @@
                 {
                     <tr>
                         <td>@aauthor.AuthorID</td>
-                        <td>@aauthor.Name</td>s
+                        <td>@aauthor.Name</td>
                         <td>@aauthor.Bio</td>
                         <td>
                             <form asp-action="Indexx" method="post" style="display: inline;">

@@ -132,7 +132,7 @@
 
         <form asp-action="@((bool)isEdit ? "EditStudent" : "AddStudent")" method="post">
             <div class="row mb-3">
-                
+                <input type="text" class="form-control" name="StudentId" value="@student.StudentId" hidden required>
                 <div class="col-md-12">
                     <label class="form-label">Student Name</label>
                     <input type="text" class="form-control" name="Name" value="@student.Name" required>
