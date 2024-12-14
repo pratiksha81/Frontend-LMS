@@ -11,29 +11,39 @@ namespace Presentation.Controllers
     {
         private readonly ITransactionRepository _transactionRepository;
         private readonly IStudentRepository _studentRepository;
-        public TransactionController(ITransactionRepository transactionRepository, IStudentRepository studentRepository)
+        private readonly IBookRepository _bookRepository;
+
+        public TransactionController(ITransactionRepository transactionRepository, IStudentRepository studentRepository, IBookRepository bookRepository)
         {
             _transactionRepository = transactionRepository;
             _studentRepository = studentRepository;
+            _bookRepository = bookRepository;
         }
 
-        // Get all transactions
         [HttpGet]
         public async Task<IActionResult> Index()
         {
             var transactions = await _transactionRepository.GetAllTransactionsAsync();
             var students = await _studentRepository.GetAllStudentsAsync();
+            var books = await _bookRepository.GetAllBooksAsync();
+
             var studentData = students.Select(s => new { s.StudentId, s.Name }).ToList();
+            var bookData = books.Select(b => new { b.BookId, b.Title }).ToList();
+
             HttpContext.Session.SetObjectAsJson("StudentData", studentData);
+            HttpContext.Session.SetObjectAsJson("BookData", bookData);
+
+            ///Retrieve username from session
+            //ViewBag.Username = HttpContext.Session.GetString("Username");
+
             return View(transactions);
         }
 
 
 
-
         // Add a transaction (submit form)
         [HttpPost]
-        public async Task<IActionResult> AddTransaction(Transaction transaction)
+        public async Task<IActionResult> AddTransaction(TransactionDTO transaction)
         {
             if (ModelState.IsValid)
             {

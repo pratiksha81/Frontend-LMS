@@ -9,7 +9,7 @@ namespace Presentation.Repositories
     {
         Task<List<Transaction>> GetAllTransactionsAsync();
         Task<Transaction> GetTransactionByIdAsync(int id);
-        Task<bool> AddTransactionAsync(Transaction transaction);
+        Task<bool> AddTransactionAsync(TransactionDTO transaction);
         Task<bool> UpdateTransactionAsync(Transaction transaction);
         Task<bool> DeleteTransactionAsync(int id);
     }

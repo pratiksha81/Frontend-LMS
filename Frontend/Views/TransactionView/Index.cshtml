@@ -74,27 +74,28 @@
             <thead>
                 <tr style="text-align:center">
                     <th>Transaction ID</th>
-                    <th>Student ID</th>
-                    <th>User ID</th>
-                    <th>Book ID</th>
+                    <th>Student Name</th>
+                    <th>Username</th>
+                    <th>Book Title</th>
                     <th>Transaction Type</th>
                     <th>Date</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (var ttransaction in Model)
+                @foreach (var transaction in Model)
 
                 {
                     <tr style="text-align:center">
-                        <td>@ttransaction.TransactionId</td>
-                        <td>@ttransaction.StudentId</td>
-                        <td>@ttransaction.UserId</td>
-                        <td>@ttransaction.BookId</td>
-                        <td>@ttransaction.TransactionType</td>
-                        <td>@ttransaction.Date.ToShortDateString()</td>
+                        <td>@transaction.TransactionId</td>
+                        <td>@transaction.StudentName</td>
+                        <td>@transaction.Username</td>
+                        <td>@transaction.BookTitle</td>
+                        <td>@transaction.TransactionType</td>
+                        <td>@transaction.Date.ToShortDateString()</td>
                     </tr>
                 }
             </tbody>
         </table>
     </div>
 </div>
+

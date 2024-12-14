@@ -28,7 +28,7 @@ namespace Presentation.Repositories
         }
 
         // Add a new transaction
-        public async Task<bool> AddTransactionAsync(Transaction transaction)
+        public async Task<bool> AddTransactionAsync(TransactionDTO transaction)
         {
             var response = await _httpClient.PostAsJsonAsync("https://localhost:7178/api/Transactions", transaction);
             return response.IsSuccessStatusCode;
