@@ -34,6 +34,15 @@ namespace Presentation.Repositories
             return response.IsSuccessStatusCode;
         }
 
+        // Search
+
+        public async Task<List<Transaction>> SearchTransactionsAsync(string search)
+        {
+            return await _httpClient.GetFromJsonAsync<List<Transaction>>($"https://localhost:7178/api/Transactions/search?search={search}");
+
+        }
+    
+
         // Update an existing transaction
         public async Task<bool> UpdateTransactionAsync(Transaction transaction)
         {
